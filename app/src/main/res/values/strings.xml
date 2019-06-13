@@ -16,6 +16,11 @@
     <string name="STOP_SCANNING">Stop Scanning</string>;
     <string name="SCANNING">Scanning</string>;
 
+    <string name="ALERT_LEVEL_LOW">0x30</string>;
+    <string name="ALERT_LEVEL_MID">0x31</string>;
+    <string name="ALERT_LEVEL_HIGH">0x32</string>;
+
+
 
     <string-array name="Planets">
         <item>Sun</item>

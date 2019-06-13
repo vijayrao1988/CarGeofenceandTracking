@@ -12,8 +12,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
-import in.ac.iitd.cargeofenceandtracking.bdsk.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,28 +37,28 @@ public class BleScanner {
 
         //check bluetooth is available and on
         if (bluetooth_adapter == null || !bluetooth_adapter.isEnabled()) {
-            Log.d(Constants.TAG, "Bluetooth is NOT switched on");
+            Log.d("@string/TAG", "Bluetooth is NOT switched on");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             enableBtIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(enableBtIntent);
         }
-        Log.d(Constants.TAG, "Bluetooth is switched on");
+        Log.d("@string/TAG", "Bluetooth is switched on");
     }
 
     public void startScanning(final ScanResultsConsumer scan_results_consumer, long stop_after_ms) {
         if (scanning) {
-            Log.d(Constants.TAG, "Already scanning so ignoring startScanning request");
+            Log.d("@string/TAG", "Already scanning so ignoring startScanning request");
             return;
         }
         if (scanner == null) {
             scanner = bluetooth_adapter.getBluetoothLeScanner();
-            Log.d(Constants.TAG, "Created BluetoothScanner object");
+            Log.d("@string/TAG", "Created BluetoothScanner object");
         }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (scanning) {
-                    Log.d(Constants.TAG, "Stopping scanning");
+                    Log.d("@string/TAG", "Stopping scanning");
                     scanner.stopScan(scan_callback);
                     setScanning(false);
                 }
@@ -68,7 +66,7 @@ public class BleScanner {
         }, stop_after_ms);
 
         this.scan_results_consumer = scan_results_consumer;
-        Log.d(Constants.TAG, "Scanning");
+        Log.d("@string/TAG", "Scanning");
         List<ScanFilter> filters;
 
         filters = new ArrayList<ScanFilter>();
@@ -83,7 +81,7 @@ public class BleScanner {
 
     public void stopScanning() {
         setScanning(false);
-        Log.d(Constants.TAG, "Stopping scanning");
+        Log.d("@string/TAG", "Stopping scanning");
         scanner.stopScan(scan_callback);
     }
 

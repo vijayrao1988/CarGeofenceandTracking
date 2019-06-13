@@ -20,8 +20,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
-import in.ac.iitd.cargeofenceandtracking.bdsk.Constants;
-
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -166,13 +164,13 @@ public class BleAdapterService extends Service {
                 msg.setData(bundle);
                 msg.sendToTarget();
             } else {
-                Log.d(Constants.TAG, "failed to read characteristic:"+characteristic.getUuid().toString()+" of service "+characteristic.getService().getUuid().toString()+" : status="+status);
+                Log.d("@string/TAG", "failed to read characteristic:"+characteristic.getUuid().toString()+" of service "+characteristic.getService().getUuid().toString()+" : status="+status);
                 sendConsoleMessage("characteristic read err:"+status);
             }
         }
 
         public void onCharacteristicWrite (BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            Log.d(Constants.TAG, "onCharacteristicWrite");
+            Log.d("@string/TAG", "onCharacteristicWrite");
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Bundle bundle = new Bundle();
                 bundle.putString(PARCEL_CHARACTERISTIC_UUID, characteristic.getUuid().toString());
@@ -195,19 +193,19 @@ public class BleAdapterService extends Service {
 
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-        Log.d(Constants.TAG, "onConnectionStateChange: status=" + status);
+        Log.d("@string/TAG", "onConnectionStateChange: status=" + status);
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                Log.d(Constants.TAG, "onConnectionStateChange: CONNECTED");
+                Log.d("@string/TAG", "onConnectionStateChange: CONNECTED");
                 connected = true;
                 Message msg = Message.obtain(activity_handler, GATT_CONNECTED);
                 msg.sendToTarget();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                Log.d(Constants.TAG, "onConnectionStateChange: DISCONNECTED");
+                Log.d("@string/TAG", "onConnectionStateChange: DISCONNECTED");
                 connected = false;
                 Message msg = Message.obtain(activity_handler, GATT_DISCONNECT);
                 msg.sendToTarget();
                 if (bluetooth_gatt != null) {
-                    Log.d(Constants.TAG,"Closing and destroying BluetoothGatt object"); bluetooth_gatt.close();
+                    Log.d("@string/TAG","Closing and destroying BluetoothGatt object"); bluetooth_gatt.close();
                     bluetooth_gatt = null;
                 }
             }
@@ -218,7 +216,7 @@ public class BleAdapterService extends Service {
         if (bluetooth_adapter == null || bluetooth_gatt == null) {
             return;
         }
-        Log.d(Constants.TAG,"Discovering GATT services");
+        Log.d("@string/TAG","Discovering GATT services");
         bluetooth_gatt.discoverServices();
     }
 
@@ -229,7 +227,7 @@ public class BleAdapterService extends Service {
     }
 
     public boolean readCharacteristic(String serviceUuid, String characteristicUuid) {
-        Log.d(Constants.TAG, "readCharacteristic:"+characteristicUuid+" of service "+serviceUuid);
+        Log.d("@string/TAG", "readCharacteristic:"+characteristicUuid+" of service "+serviceUuid);
         if (bluetooth_adapter == null || bluetooth_gatt == null) {
             sendConsoleMessage("readCharacteristic: bluetooth_adapter|bluetooth_gatt_null");
             return false;
@@ -250,7 +248,7 @@ public class BleAdapterService extends Service {
     }
 
     public boolean writeCharacteristic(String serviceUuid, String characteristicUuid, byte[] value) {
-        Log.d(Constants.TAG,"writeCharacteristic:"+characteristicUuid+" of service "+serviceUuid);
+        Log.d("@string/TAG","writeCharacteristic:"+characteristicUuid+" of service "+serviceUuid);
         if (bluetooth_adapter == null || bluetooth_gatt == null) {
             sendConsoleMessage("writeCharacteristic: bluetooth_adapter|bluetooth_gatt null");
             return false;
@@ -285,7 +283,7 @@ public class BleAdapterService extends Service {
     }
 
     private boolean refreshDeviceCache(BluetoothGatt gatt){
-        Log.d(Constants.TAG, "Refreshing device cache");
+        Log.d("@string/TAG", "Refreshing device cache");
         try {
             BluetoothGatt localBluetoothGatt = gatt;
             Method localMethod = localBluetoothGatt.getClass().getMethod("refresh", new Class[0]);
@@ -295,7 +293,7 @@ public class BleAdapterService extends Service {
             }
         }
         catch (Exception localException) {
-            Log.d(Constants.TAG, "An exception occurred while refreshing device");
+            Log.d("@string/TAG", "An exception occurred while refreshing device");
         }
         return false;
     }
