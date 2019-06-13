@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "181015615213",
+    "firebase_url": "https://cargeofenceandtracking.firebaseio.com",
+    "project_id": "cargeofenceandtracking",
+    "storage_bucket": "cargeofenceandtracking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181015615213:android:2ee017ee89f6a3c2",
+        "android_client_info": {
+          "package_name": "in.ac.iitd.cargeofenceandtracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181015615213-1kj905b1je5k1iqli3ja9dv7qbpbkh58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHISbcFoz-dTUX51UO9GBOtH5r--eF5Cg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
